@@ -21,7 +21,7 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //ShakeActivityに遷移するように設定
-                Intent intent = new Intent(getApplicationContext(), ShakeActivity.class);
+                Intent intent = new Intent(getApplicationContext(), com.example.kandaomikuji.ShakeActivity.class);
 
                 //インテントの開始
                 startActivity(intent);
