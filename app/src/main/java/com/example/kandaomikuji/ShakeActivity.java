@@ -20,7 +20,7 @@ public class ShakeActivity extends AppCompatActivity implements SensorEventListe
 
     private static final int LOWEST_SPEED = 3000;  //1カウントに必要な端末の最低速度
     private static final int SHAKE_TIMEOUT = 1000;    //端末が最低速度で振られるまでの時間
-    private static final int SHAKE_COUNT = 15; //端末が振るのに必要なカウント数
+    private static final int SHAKE_COUNT = 3; //端末が振るのに必要なカウント数
     private int shakeCount = 0;  //端末が振られたカウント数
     private long lastTimeDetectAcceleration = 0;    //一番最後に端末が最低速度以上の速度で振られた時間
     private float xDimen = 0;  //端末が一番最後に振られたときのX座標の位置
@@ -49,6 +49,7 @@ public class ShakeActivity extends AppCompatActivity implements SensorEventListe
         //加速度センサーの値を取得する
         List<Sensor> sensors = manager.getSensorList(Sensor.TYPE_ACCELEROMETER);
 
+        // イベントリスナーを登録する
         if(sensors.size() > 0) {
             Sensor s = sensors.get(0);
             //リスナーの登録
@@ -74,6 +75,18 @@ public class ShakeActivity extends AppCompatActivity implements SensorEventListe
      */
     @Override
     public void onSensorChanged(SensorEvent event) {
+
+        /* 2つ以上のセンサーを扱う場合はセンサーの種類ごとに処理する必要があります。
+        // 例：値が変化したセンサーが照度センサーだった場合
+        if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
+            // 処理
+        }
+        // 例：値が変化したセンサーが近接センサーだった場合
+        else if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
+            // 処理
+        }
+        */
+
 
         // 現在の時間をチェック
         long now = System.currentTimeMillis();
@@ -130,6 +143,7 @@ public class ShakeActivity extends AppCompatActivity implements SensorEventListe
         zDimen = z;
     }
 
+    /* センサーの精度が変更されると呼ばれる */
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
